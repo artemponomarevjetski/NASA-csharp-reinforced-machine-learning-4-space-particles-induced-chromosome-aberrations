@@ -45,7 +45,7 @@ namespace GraficDisplay
             for (int i = 0; i < rs.MChistories; i++)
             {
                 TimeOperator timeOperator = new TimeOperator();
-                switch (RadiationSchema.rad_repair_action) // zzz-- enable only DNA breakage
+                switch (RadiationSchema.rad_repair_action) // enable only DNA breakage
                 {
                     case 0:
                         {
@@ -77,7 +77,7 @@ namespace GraficDisplay
             OrginizeDataRepository();
             SendNotifications();
             Visualize.CreateWordDoc(listObjs, "Incremental step in the final state analysis: \n");
-            //Visualize.CreateWordDoc(listObjs, "After radiation: \n"); // zzz ?
+            //Visualize.CreateWordDoc(listObjs, "After radiation: \n"); 
             MessageBox.Show("End Of Chronic Exposure!");
             Application.Exit();
         }
@@ -198,12 +198,12 @@ namespace GraficDisplay
         //
         public RadiationSchema()
         {
-            DefaultBeam(); // zzz -- before XML input becomes available
+            DefaultBeam(); // before XML or JSON input becomes available
         }
         public void DefaultBeam()
         {
-            MChistories = 1; // zzz -- introduce GUI
-            nBeams = 1; // zzz -- introduce GUI
+            MChistories = 1; // introduce GUI
+            nBeams = 1; // introduce GUI
             entryTime = new double[nBeams];
             exitTime = new double[nBeams];
             D = new double[nBeams];
@@ -223,7 +223,7 @@ namespace GraficDisplay
                         }
                         break;
                 }
-                D[i] = 3.0 / Convert.ToDouble(nBeams); // Gy  // zzz input from GUI  // zzz666
+                D[i] = 3.0 / Convert.ToDouble(nBeams); // Gy, input from GUI  
                 entryTime[i] = i * timeFractionation;
                 exitTime[i] = (i + 1) * timeFractionation; // so, effectively, the total beam lasts 10 hrs
             }
@@ -253,7 +253,7 @@ namespace GraficDisplay
                     l.X = random.Next(0, 2 * rnucleus) - rnucleus;
                     l.Y = random.Next(0, 2 * rnucleus) - rnucleus;
                     l.Z = random.Next(0, 2 * rnucleus) - rnucleus;
-                    double a = 1.0 / 2.0, b = 1.0 / 2.0, c = 4.0; // nucleus parameters for elliptic nucleus // zzz GUI input                
+                    double a = 1.0 / 2.0, b = 1.0 / 2.0, c = 4.0; // nucleus parameters for elliptic nucleus // GUI input                
                     if (a * (l.X - rnucleus) * (l.X - rnucleus) + b * (l.Y - rnucleus) * (l.Y - rnucleus) + c * (l.Z - rnucleus) * (l.Z - rnucleus) < rnucleus * rnucleus) // elliptic nucleus            
                     {
                         break;
@@ -490,12 +490,12 @@ namespace GraficDisplay
             //            itemp++;
             //if (itemp != 2 * dsbList.DSBpositions.Count)
             //    return false;
-            //else // zzz -- update this function
+            //else // update this function
             return true;
         }
         public bool Detailed_checkDSBlist(DSBs dsbs) // everytime DSBs are created or repaired, this function does some bookkeeping
         {
-            //dsbList.ndsb = dsbList.DSBpositions.Count; // zzz
+            //dsbList.ndsb = dsbList.DSBpositions.Count; 
             return true; // add checks that might return false
         }
         //   
