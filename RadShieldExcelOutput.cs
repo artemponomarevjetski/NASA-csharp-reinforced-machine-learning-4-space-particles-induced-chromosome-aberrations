@@ -110,7 +110,7 @@ namespace GraficDisplay
                     oWB.Close(false, wbPath, Type.Missing);
                     System.Runtime.InteropServices.Marshal.ReleaseComObject(oWB);
                     oXL.Quit();
-                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oXL); // zzz -- creates a workbook that leaves behind a process after opening it 
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oXL); // creates a workbook that leaves behind a process after opening it 
                 }
                 catch
                 {
@@ -119,7 +119,7 @@ namespace GraficDisplay
                     oWB.Close(false, wbPath, Type.Missing);
                     System.Runtime.InteropServices.Marshal.ReleaseComObject(oWB);
                     oXL.Quit();
-                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oXL); // zzz -- creates a workbook that leaves behind a process after opening it  }
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oXL); // creates a workbook that leaves behind a process after opening it  }
                 }
             }
         }
