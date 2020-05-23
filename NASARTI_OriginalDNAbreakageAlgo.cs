@@ -229,7 +229,7 @@ namespace GraficDisplay
             //
             public static bool InsideEllipsoid(Location l)
             {
-                double a = 1.0 / 2.0, b = 1.0 / 2.0, c = 4.0; // nucleus parameters for elliptic nucleus // zzz GUI input
+                double a = 1.0 / 2.0, b = 1.0 / 2.0, c = 4.0; // nucleus parameters for elliptic nucleus, GUI input
                 int rnucleus = Convert.ToInt32(R / lattice_dim);
                 if (a * (l.X - rnucleus) * (l.X - rnucleus) + b * (l.Y - rnucleus) * (l.Y - rnucleus) + c * (l.Z - rnucleus) * (l.Z - rnucleus) < rnucleus * rnucleus) // elliptic nucleus            
                     return true;
@@ -239,7 +239,7 @@ namespace GraficDisplay
             //
             public bool PrepairDSBpositionsInGenome(RadiationSchema rs, DSBs DSBdata)
             {
-                bool bParallel = false; // zzz666
+                bool bParallel = false; 
                 try
                 {
                     RandomWalk rw = new RandomWalk();
@@ -251,7 +251,7 @@ namespace GraficDisplay
                     int j = 0;
                     if (!bParallel)
                     {
-                        for (int chn = 0; chn < IntactHumanGenome.nObjs; chn++) // zzz666 split these into subtasks
+                        for (int chn = 0; chn < IntactHumanGenome.nObjs; chn++) // split these into subtasks
                         {
                             while (true)
                             {
@@ -259,7 +259,7 @@ namespace GraficDisplay
                                 rw.LL[j].Y = random.Next(0, 2 * rnucleus) - rnucleus;
                                 rw.LL[j].Z = random.Next(0, 2 * rnucleus) - rnucleus;
                                 if (InsideEllipsoid(rw.LL[j])) break;
-                            } // zzz666 these RWs don't have loops or domains yet
+                            } // these RWs don't have loops or domains yet
                             rw.nmonomer[j] = j;
                             j++;
                             for (int i = 0; i < Convert.ToInt32(IntactHumanGenome.NC[chn] / IntactHumanGenome.monomerSize) - 1; i++)
@@ -325,7 +325,7 @@ namespace GraficDisplay
                             //Console.WriteLine("Number Of Logical Processors: {0}", item["NumberOfLogicalProcessors"]);
                             logicalprocessorCount += int.Parse(item["NumberOfLogicalProcessors"].ToString());
                         }
-                        int nThreads = coreCount; // zzz ? or logicalprocessorCount?
+                        int nThreads = coreCount; // ? or logicalprocessorCount?
                         Thread[] oThread = null;
                         for (thread = 0; thread < nThreads; thread++)
                         {
@@ -336,7 +336,7 @@ namespace GraficDisplay
                         }
                     }
                     return true;
-                    // zzz666 run subtask all the way here, so that every CPU would produce DSBdata for each own RW, which has 46/nCPU  chromosomes; meaure time with and w/o parallelization                
+                    // run subtask all the way here, so that every CPU would produce DSBdata for each own RW, which has 46/nCPU  chromosomes; meaure time with and w/o parallelization                
                 }
                 catch { return false; }
             }
@@ -371,7 +371,7 @@ namespace GraficDisplay
                             rw.LL[j].Y = random.Next(0, 2 * rnucleus) - rnucleus;
                             rw.LL[j].Z = random.Next(0, 2 * rnucleus) - rnucleus;
                             if (InsideEllipsoid(rw.LL[j])) break;
-                        } // zzz666 these RWs don't have loops or domains yet
+                        } // these RWs don't have loops or domains yet
                         rw.nmonomer[j] = j;
                         j++;
                         for (int i = 0; i < Convert.ToInt32(IntactHumanGenome.NC[chn] / IntactHumanGenome.monomerSize) - 1; i++)
@@ -478,7 +478,7 @@ namespace GraficDisplay
                                     }
                                     else
                                     {
-                                        if (r >= DSBs.DSBcomplP[0] && r < DSBs.DSBcomplP[1]) // zzz can a DSB appear more than 1 time at the same monomer
+                                        if (r >= DSBs.DSBcomplP[0] && r < DSBs.DSBcomplP[1]) // can a DSB appear more than 1 time at the same monomer
                                             new_dsb.DSBcmplx = DSBs.DSBstruct.DSBcomplexity.DSBplus;
                                         else
                                             new_dsb.DSBcmplx = DSBs.DSBstruct.DSBcomplexity.DSBplusplus;
@@ -489,7 +489,7 @@ namespace GraficDisplay
                             catch { return false; }
                         }
                     }
-                    dose_total /= Convert.ToDouble(rw.nmonomer.Length); // total dose integrated over all monomers // zzz might wanna output somewhere
+                    dose_total /= Convert.ToDouble(rw.nmonomer.Length); // total dose integrated over all monomers // might wanna output somewhere
                     return true;
                 }
                 catch { return false; }
@@ -760,7 +760,7 @@ namespace GraficDisplay
             double u = GetUniform();
             return (u < 0.5) ?
                 mean + scale * Math.Log(2.0 * u) :
-                mean - scale * Math.Log(2 * (1 - u)); // zzz why not 2.0? This needs to be resolved, only if a Laplace dist. is used...
+                mean - scale * Math.Log(2 * (1 - u)); // why not 2.0? This needs to be resolved, only if a Laplace dist. is used...
         }
 
         public static double GetLogNormal(double mu, double sigma)
