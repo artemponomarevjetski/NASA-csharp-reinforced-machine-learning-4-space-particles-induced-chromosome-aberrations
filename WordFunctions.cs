@@ -73,9 +73,9 @@ namespace GraficDisplay
                         Ytrans += isize_old;
                         int isize = Convert.ToInt32(300.0 * Convert.ToDouble(b.Size) / Convert.ToDouble(isizeMax));
                         isize_old = isize;
-                        Word.Shape bandShape = oDocument.Shapes.AddShape((o.md.f_e.Count == 0 ? 18 : 13), Xtrans, Ytrans, 30, (o.md.f_e.Count == 0 ? 2 * isize : isize), ref missing); // bands and rings  // zzz666 rings
+                        Word.Shape bandShape = oDocument.Shapes.AddShape((o.md.f_e.Count == 0 ? 18 : 13), Xtrans, Ytrans, 30, (o.md.f_e.Count == 0 ? 2 * isize : isize), ref missing); // bands and rings or just rings
                         bandShape.Fill.Solid();
-                        if (o.md.O_type == MetaData.ObjectType.fully_repaired) // zzz666 these need to be counted as intact chromosomes
+                        if (o.md.O_type == MetaData.ObjectType.fully_repaired) // these need to be counted as intact chromosomes
                             bandShape.Fill.ForeColor.RGB = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Magenta);
                         else
                             bandShape.Fill.ForeColor.RGB = System.Drawing.ColorTranslator.ToOle(b.Color);
@@ -89,8 +89,8 @@ namespace GraficDisplay
                                 bandShape.TextFrame.TextRange.Font.Color = Word.WdColor.wdColorBlack; // for contrast
                         foreach (Centromere c in o.md.c_l)
                         {
-                            int pos = (b.Upstream_end_position - c.Position) / 1000; // zzz
-                            //Microsoft.Office.Interop.Word.Shape centromereShape = oDocument.Shapes.AddShape(6, Xtrans, Ytrans, 30, Ytrans + pos, ref missing); // centromere // zzz -- which centromere?
+                            int pos = (b.Upstream_end_position - c.Position) / 1000;
+                            //Microsoft.Office.Interop.Word.Shape centromereShape = oDocument.Shapes.AddShape(6, Xtrans, Ytrans, 30, Ytrans + pos, ref missing); // centromere // which centromere?
                         }
                     }
                 }
@@ -225,7 +225,7 @@ namespace GraficDisplay
                         foreach (Centromere c in o.md.c_l)
                         {
                             int pos = (b.Upstream_end_position - c.Position) / 1000;
-                            //Microsoft.Office.Interop.Word.Shape centromereShape = oDocument.Shapes.AddShape(6, Xtrans, Ytrans, 30, Ytrans + pos, ref missing); // centromere // zzz -- which centromere?
+                            //Microsoft.Office.Interop.Word.Shape centromereShape = oDocument.Shapes.AddShape(6, Xtrans, Ytrans, 30, Ytrans + pos, ref missing); // centromere // which centromere?
                         }
                         Ytrans += isize;
                     }
