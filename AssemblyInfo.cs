@@ -1,15 +1,16 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GraficDisplay")]
-[assembly: AssemblyDescription("Graphlib library")]
+[assembly: AssemblyTitle("GraphLibrary")]
+[assembly: AssemblyDescription("Library for graph drawing")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GraficDisplay")]
-[assembly: AssemblyCopyright("Copyright ©  NASA JSC/KBRwyle")]
+[assembly: AssemblyProduct("GraphLibrary")]
+[assembly: AssemblyCopyright("Copyright © NASA JSC/KBRwyle")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("dc8894fd-8b51-4f5f-a7d2-bea2702e1460")]
+[assembly: Guid("b23e30ac-c4b8-4863-90d0-cf0ad837c050")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -28,5 +29,7 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.1")]
 [assembly: AssemblyFileVersion("1.0.0.1")]
