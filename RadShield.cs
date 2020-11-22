@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace GraficDisplay
 {
-    // using InsertChart; // incompatible lib for charting, fix it for visual output
+    // using InsertChart; // zzz -- incompatible lib for charting, fix it for visual output
 
     public partial class MainForm : Form
     {
         public partial class Radiation
         {
             public enum p_type { photon, neutron, proton, He, Ne, Ti, Fe, N, C, O, Li, Si, Ar, not_known }; // etc.
-            public readonly int nParticlesInitial = Convert.ToInt32(100.0); 
+            public readonly int nParticlesInitial = Convert.ToInt32(100.0); // zzz
             int nShields;
             RadiationShield[] radShields;
             public Radiation()
@@ -302,7 +302,7 @@ namespace GraficDisplay
                     foreach (Particle p in list_allParticles)
                         //if (p.p_t == p_type.gamma)
                         //    endEnergy += p.E / 2.0; // because of isotropy of gamma radiation
-                        //else 
+                        //else // zzz
                         endEnergy += p.E;
                     Depth[istep] = istep * deltaDepth;
                     AttenuationOfEnergy_at_depth[istep] = endEnergy / startEnergy; // final result
@@ -312,10 +312,10 @@ namespace GraficDisplay
 
             public void OneDepthStepWithinMaterial(Particle p, double deltaDepth, int i)
             {
-                DeltaEnergy(p, deltaDepth); // due to ionization; gradual slowing down
+                DeltaEnergy(p, deltaDepth); // due to ionization; gradual slowing down // zzz
                 //     NewParticles(p, deltaDepth, i); // these are the secondaries, the modified primary and the modified target produced in fragmentation
                 //                                // isomer emitted gamma ray
-                //    IsomerGammaEmission(Particle p, double deltaDepth, int i)
+                //    IsomerGammaEmission(Particle p, double deltaDepth, int i) // zzz
                 //Random random = new Random();
                 //double pp = SimpleRNG.GetUniform();
                 //if (pp < md.shieldStructure.concentrationOfHafnium)
@@ -334,7 +334,7 @@ namespace GraficDisplay
 
             public void DeltaEnergy(Particle p, double deltaDepth)
             {
-                double rho = md.physicalMetaData.densityOfAl; 
+                double rho = md.physicalMetaData.densityOfAl; // zzz
                 rho *= (1.0e-3 / Math.Pow(1.0e-2, 3));
                 //      p.E -= (((deltaDepth * (1.0e-3 / Math.Pow(1.0e-2, 2))) / rho) * BetheBlochFormula(p));
                 p.E -= ((deltaDepth * (1.0e-3 / Math.Pow(1.0e-2, 2))) / rho) * 1.0e6 * (0.5 * 1.0e-3); // just depth in microns times LET
@@ -387,17 +387,17 @@ namespace GraficDisplay
                 //const double avogadroConst = 6.022140857e23; // N_a
                 //const double HfgramsPerMole = 178.49; //  g / mol
                 const double crosssectionNeutron2Hf = 104.0; // b
-                double hypotheticalCrossSection = md.physicalMetaData.sensitivityFactor * crosssectionNeutron2Hf; // b , or 500.0e-3 b? // future isomer excitation model
+                double hypotheticalCrossSection = md.physicalMetaData.sensitivityFactor * crosssectionNeutron2Hf; // b , or 500.0e-3 b? // zzz -- future isomer excitation model
                 double crosssectionProton2Hf = hypotheticalCrossSection * md.physicalMetaData.converionFactorOfBarn2m2 * md.physicalMetaData.m2cm * md.physicalMetaData.m2cm; // cm^2                                                                                                                                                         
                 double number_density = md.physicalMetaData.densityOfHf * md.physicalMetaData.avogadroConst * (1.0 / md.physicalMetaData.HfgramsPerMole); // moles/cm^3
                 double meanFreePath = 1.0 / (crosssectionProton2Hf * number_density); // cm
                 double T = Math.Exp(-(deltaDepth / md.physicalMetaData.densityOfHf) / meanFreePath);
                 //double numberOfCollisions = deltaDepth / meanFreePath / md.physicalMetaData.densityOfHf;
                 //double totalNumberOfCollisions = MetaData.StructuralMetaData.ShieldThickness / meanFreePath / md.physicalMetaData.densityOfHf;
-                double sensitivityFactor = 1.0; // for Fe ions and other heavy ions, it varies from 1 to 100 of protons' crosssection
+                double sensitivityFactor = 1.0; // zzz -- for Fe ions and other heavy ions, it varies from 1 to 100 of protons' crosssection
                                                 //Random random = new Random();
                                                 //double pp = SimpleRNG.GetUniform();
-                                                //if (pp < 1 - T) // check if a more detailed Poisson model is necessary
+                                                //if (pp < 1 - T) // zzz-- check if a more detailed Poisson model is necessary
                                                 //{
                 if (p.p_t == p_type.proton)
                     p.E -= ((1 - T) * 2.45); // MeV loss due to excitation              
@@ -426,7 +426,7 @@ namespace GraficDisplay
                             Particle p_born = new Particle(p_type.neutron); // a constructor for a proton; later add more secondaries, like neutrons, light ions, etc.
                             list_newParticles.Add(p_born);
                         }
-                        //double z = p.Z - 2; // crude model of fragmentation           
+                        //double z = p.Z - 2; // crude model of fragmentation    // zzz         
                         //double e = 0.8 * p.E;
                         //double a = p.A - n_products / 2;
                         //Particle p_primary_frag;
@@ -464,7 +464,7 @@ namespace GraficDisplay
                                                                                           //double product = 0.0;
                                                                                           //for (int j = 0; j < md.shieldStructure.densityOfHafnium[i] * Math.Pow(deltaDepth, 3); j++)
                                                                                           //    product *= (1.0 - pp);
-                                                                                          //return (1.0 - product); // check this
+                                                                                          //return (1.0 - product); // zzz -- check this
                 return pp;
             }
 
@@ -629,7 +629,7 @@ namespace GraficDisplay
                 public int nlayers;
                 public double number_density;
                 public double meanFreePath;
-                public double sensitivityFactor = 0.0; // for Fe ions and other heavy ions, it varies from 1 to 100 of protons' crosssection           
+                public double sensitivityFactor = 0.0; // zzz -- for Fe ions and other heavy ions, it varies from 1 to 100 of protons' crosssection           
                 public enum CrosssectionsType
                 {
                     ionizations,
@@ -642,7 +642,7 @@ namespace GraficDisplay
                 }
                 public PhysicalMetaData(int i)
                 {
-                    crosssectionProton2Hf = 500.0e-3 * converionFactorOfBarn2m2 * m2cm * m2cm; // 500 mbhttps://github.com/artemponomarevjetski
+                    crosssectionProton2Hf = 500.0e-3 * converionFactorOfBarn2m2 * m2cm * m2cm; // 500 mb // zzz
                     number_density = densityOfHf * avogadroConst * (1.0 / HfgramsPerMole); // moles/cm^3
                     meanFreePath = 1.0 / (crosssectionProton2Hf * number_density); // cm
                     switch (i)
